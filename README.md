@@ -57,7 +57,27 @@ php_画图
 
 
 
+ 在图片上添加画图
  
+             
+              
+                imagecreatefromjpeg — 由文件或 URL 创建一个新图象。
+                imagecolorallocate为一幅图像分配颜色
+                imageline — 画一条线段
+                imageellipse — 画一个椭圆
+                imagegif — 输出图象到浏览器或文件。
+                imagedestroy — 销毁一图像
+                $img=imagecreatefromjpeg("img/1.jpg");
+
+                $red= imagecolorallocate($img, 255, 0, 0);
+
+                imageline($img, 0, 0, 100, 100, $red);
+
+                imageellipse($img, 250, 160, 100, 100, $red);
+
+                imagegif($img, "img/2.jpg");
+
+                imagedestroy($img);
 
 
 
