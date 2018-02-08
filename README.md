@@ -214,9 +214,28 @@ php_画图
 
                   thumn("img/1.jpg", 200, 200, "./img/7.jpg");
 
+图片的裁剪
 
 
+         imagecopyresized — 拷贝部分图像并调整大小
+         imagecopyresampled — 重采样拷贝部分图像并调整大小
+         
 
+         function cut($background, $cut_x, $cut_y, $cut_width, $cut_height, $location){
+
+                  $back=imagecreatefromjpeg($background);
+
+                  $new=imagecreatetruecolor($cut_width, $cut_height);
+
+                  imagecopyresampled($new, $back, 0, 0, $cut_x, $cut_y, $cut_width,                                    $cut_height,$cut_width,$cut_height);
+
+                  imagejpeg($new, $location);
+
+                  imagedestroy($new);
+                  imagedestroy($back);
+                }
+
+                cut("./img/1.jpg", 440, 140, 117, 112, "./img/8.jpg");
 
 
 
