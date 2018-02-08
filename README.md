@@ -282,6 +282,72 @@ php_画图
                 mark_pic("./images/hee.jpg", "./images/gaolf.gif", 50, 200);
 
 
+图片旋转
+
+                imagerotate -- 用给定角度旋转图像
+		
+		
+
+                $back=imagecreatefromjpeg("./images/hee.jpg");
+
+	        $new=imagerotate($back, 45, 0);
+
+	         imagejpeg($new, "./images/hee9.jpg");
+
+
+
+图片翻转
+    	
+          沿Y轴  沿X轴
+
+             沿Y轴 
+            function turn_y($background, $newfile){
+		$back=imagecreatefromjpeg($background);
+
+		$width=imagesx($back);
+		$height=imagesy($back);
+
+		$new=imagecreatetruecolor($width, $height);
+
+		for($x=0; $x < $width; $x++){
+			imagecopy($new, $back, $width-$x-1, 0, $x, 0, 1, $height);
+		}
+
+		imagejpeg($new, $newfile);
+
+		imagedestroy($back);
+		imagedestroy($new);
+	}
+
+    
+      沿X轴
+	function turn_x($background, $newfile){
+		$back=imagecreatefromjpeg($background);
+
+		$width=imagesx($back);
+		$height=imagesy($back);
+
+		$new=imagecreatetruecolor($width, $height);
+
+		for($y=0; $y < $height; $y++){
+			imagecopy($new, $back,0, $height-$y-1, 0, $y, $width, 1);
+		}
+
+		imagejpeg($new, $newfile);
+
+		imagedestroy($back);
+		imagedestroy($new);
+	}
+
+	turn_y("./images/hee.jpg", "./images/hee11.jpg");
+	turn_x("./images/hee.jpg", "./images/hee12.jpg");
+
+
+
+
+
+
+
 
 
 
