@@ -166,10 +166,53 @@ php_画图
 
                 thumn("img/1.jpg", 200, 200, "./img/6.jpg");
 
+图片透明处理
+                  
+              png jpeg透明色都正常， 只有gif不正常
+              
+             imagecolortransparent — 将某个颜色定义为透明色
+             
+             imagecolorstotal — 取得一幅图像的调色板中颜色的数目
+                   
+             imagecolorsforindex — 取得某索引的颜色
+              本函数返回一个具有 red，green，blue 和 alpha 的键名的关联数组，包含了指定颜色索引的相应的值。 
 
 
+                  function thumn($background, $width, $height, $newfile) {
+                      list($s_w, $s_h)=getimagesize($background);
+
+                      if ($width && ($s_w < $s_h)) {
+                        $width = ($height / $s_h) * $s_w;
+                      } else {
+                        $height = ($width / $s_w) * $s_h;
+                      }
+
+                    $new=imagecreatetruecolor($width, $height);
+
+                    $img=imagecreatefromjpeg($background);
+
+                    $otsc=imagecolortransparent($img);
+
+                    if($otsc >=0 && $otst < imagecolorstotal($img)){
+                      $tran=imagecolorsforindex($img, $otsc);
+
+                      $newt=imagecolorallocate($new, $tran["red"], $tran["green"], $tran["blue"]);
+
+                      imagefill($new, 0, 0, $newt);
+
+                      imagecolortransparent($new, $newt);
+                    }
 
 
+                    imagecopyresized($new, $img, 0, 0, 0, 0, $width, $height, $s_w, $s_h);
+
+                    imagegif($new, $newfile);
+
+                    imagedestroy($new);
+                    imagedestroy($img);
+                  }
+
+                  thumn("img/1.jpg", 200, 200, "./img/7.jpg");
 
 
 
