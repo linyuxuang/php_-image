@@ -104,12 +104,67 @@ php_画图
 
 
 
+放大图片大小
+
+     例子一：
+ 
+    	   getimagesize(图片名称);  //返回数组， 0==width 1==height 2==type
+         imagecopyresized — 拷贝部分图像并调整大小
+
+            
+            $filename="./img/1.jpg";
+
+              $per=2;
+
+              list($width, $height)=getimagesize($filename);
+
+              $n_w=$width*$per;
+              $n_h=$width*$per;
+
+              $new=imagecreatetruecolor($n_w, $n_h);
+
+              $img=imagecreatefromjpeg($filename);
+
+              imagecopyresized($new, $img,0, 0,0, 0,$n_w, $n_h, $width, $height);
+
+
+              imagejpeg($new, "./img/4.jpg");
+
+              imagedestroy($new);
+              imagedestroy($img);
 
 
 
+      例子二：
 
+                 imagecreatetruecolor — 新建一个真彩色图像
+                 imagecreatefromjpeg — 由文件或 URL 创建一个新图象。
+                 imagecopyresampled — 重采样拷贝部分图像并调整大小
+                 imagejpeg — 输出图象到浏览器或文件。
+                 
+                 
+                function thumn($background, $width, $height, $newfile) {
+                  list($s_w, $s_h)=getimagesize($background);
 
+                  if ($width && ($s_w < $s_h)) {
+                     $width = ($height / $s_h) * $s_w;
+                  } else {
+                     $height = ($width / $s_w) * $s_h;
+                  }
 
+                  $new=imagecreatetruecolor($width, $height);
+
+                  $img=imagecreatefromjpeg($background);
+
+                  imagecopyresampled($new, $img, 0, 0, 0, 0, $width, $height, $s_w, $s_h);
+
+                  imagejpeg($new, $newfile);
+
+                  imagedestroy($new);
+                  imagedestroy($img);
+                }
+
+                thumn("img/1.jpg", 200, 200, "./img/6.jpg");
 
 
 
