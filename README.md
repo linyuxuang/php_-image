@@ -238,7 +238,48 @@ php_画图
                 cut("./img/1.jpg", 440, 140, 117, 112, "./img/8.jpg");
 
 
+加水印（文字， 图片）
 
+               imagettftext — 用 TrueType 字体向图像写入文本
+               imagecopy — 拷贝图像的一部分
+
+
+          给图片上添加文字
+
+         function mark_text($background, $text, $x, $y){
+            $back=imagecreatefromjpeg($background);
+
+            $color=imagecolorallocate($back, 0, 255, 0);
+
+            imagettftext($back, 20, 0, $x, $y, $color, "simkai.ttf", $text);
+
+            imagejpeg($back, "./images/hee8.jpg");
+
+            imagedestroy($back);
+          }
+
+          mark_text("./images/hee.jpg", "细说PHP", 150, 250);
+
+
+	 给图片上添加一个图片         
+     
+             	function mark_pic($background, $waterpic, $x, $y){
+                  $back=imagecreatefromjpeg($background);
+                  $water=imagecreatefromgif($waterpic);
+
+
+                  $w_w=imagesx($water);
+                  $w_h=imagesy($water);
+
+                  imagecopy($back, $water, $x, $y, 0, 0, $w_w, $w_h);
+
+                  imagejpeg($back,"./images/hee9.jpg");
+
+                  imagedestroy($back);
+                  imagedestroy($water);
+                }
+
+                mark_pic("./images/hee.jpg", "./images/gaolf.gif", 50, 200);
 
 
 
