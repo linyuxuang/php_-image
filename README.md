@@ -80,6 +80,44 @@ php_画图
                 imagedestroy($img);
 
 
+获取图片的属性
+
+
+                    imagesx — 取得图像宽度
+                    imagesy — 取得图像高度
+
+                    getimagesize — 取得图像大小(他返回来的是一个数组)
+                    
+                    
+                    //这是一种方式
+                    $img=imagecreatefromjpeg("./img/1.jpg");
+
+                        echo 'width:'.imagesx($img)."<br>";
+                      echo 'height:'.imagesy($img)."<br>";
+
+                    //第二种方式
+                      $arr=getimagesize("./img/1.jpg");
+                      echo 'width:'.$arr[0]."<br>";
+                      echo 'height:'.$arr[1]."<br>";
+
+                    imagedestroy($img);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
